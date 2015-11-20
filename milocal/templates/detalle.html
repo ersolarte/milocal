@@ -1,0 +1,87 @@
+﻿{% load staticfiles %}
+{% include "cabecera.html" %}                               
+                            <li>
+                                <a class="active-menu" href="{% url 'milocal.views.main' %}">
+                                    <i class="fa fa-table fa-3x"></i>Listado Productos
+                                </a>
+                            </li>   
+                            <li>
+                                <a href="{% url 'milocal.views.add'%}">
+                                    <i class="fa fa-edit fa-3x"></i>Adicionar Producto
+                                </a>
+                            </li> 
+                            <li>
+                                <a href="{% url 'milocal.views.addmarca'%}">
+                                    <i class="glyphicon glyphicon-check fa-3x"></i>Adicionar Marca
+                                </a>
+                            </li>
+                             <li>
+                                <a href="#"><i class="glyphicon glyphicon-shopping-cart fa-3x"></i>Realizar Venta</a>
+                            </li>  
+                        </ul>                   
+                    </div>                
+                </nav>  
+
+
+                <!-- /. NAV SIDE  -->
+                <div id="page-wrapper" >
+                    <div id="page-inner">                        
+                        <div class="panel-body">
+                            <div class="table-responsive">                            
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th># ID</th>
+                                            <th>Referencia</th>  
+                                            <th>Precio</th>                                              
+                                            <th>Cantidad</th>                                                
+                                            <th>Descripcion</th>
+                                            <th>Descuento</th>
+                                            <th>Marca</th>                                                
+                                            <th>Disponible</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                         <tr>
+                                            <td>                                                   
+                                                {{ producto.id }}
+                                            </td>
+                                            <td>  
+                                                {{ producto.referencia }}
+                                            </td>
+                                            <td>  
+                                                {{ producto.precio }}
+                                            </td>
+                                            <td>
+                                                {{ producto.cantidad }} 
+                                            </td> 
+                                            <td>
+                                                {{ producto.descripcion }} 
+                                            </td>       
+                                            <td>
+                                                {{ producto.descuento }} 
+                                            </td>                            
+                                            <td>
+                                                {{ marca }}
+                                            </td> 
+                                            <td>
+                                                {{ producto.disponible }} 
+                                            </td> 
+                                        </tr>                                                                                                           
+                                    </tbody>
+                                </table>
+                                <hr/>
+                                    <div align="right">
+                                        <a href="{% url 'milocal.views.main' %}">
+                                            <button type="button" class="btn btn-primary btn-back">
+                                                <i class="glyphicon glyphicon-repeat fa-2x"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- /. PAGE INNER  -->
+            </div>
+{% include "footer.html" %}

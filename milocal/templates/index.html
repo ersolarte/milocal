@@ -1,0 +1,101 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Admin PaoloSport</title>
+      <!-- BOOTSTRAP STYLES-->
+      <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet" />
+      <!-- FONTAWESOME STYLES-->
+      <link href="{% static 'assets/css/font-awesome.css' %}" rel="stylesheet" />
+      <!-- CUSTOM STYLES-->
+      <link href="{% static 'assets/css/custom.css' %}" rel="stylesheet" />
+      <!-- GOOGLE FONTS-->
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+  </head>
+  <body>
+      <div class="container">
+          <div class="row text-center ">
+              <div class="col-md-12">
+                  <br /><br />
+                  <h2>Login</h2>
+                 
+                  <h5>( Ingresa con tu cuenta para conseguir el acceso )</h5>
+                  <br />
+              </div>
+          </div>
+          <div class="row ">                 
+              <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          <strong>  Datos del usuario </strong>  
+                      </div>
+                      <div class="panel-body">
+                          {% if not user.is_authenticated %}
+                              <form role="form">
+                                  <br />
+                                  <div class="form-group input-group">
+                                      <span class="input-group-addon">
+                                          <i class="fa fa-tag"  ></i>
+                                      </span>
+                                      <input type="text" class="form-control" placeholder="Usuario " />
+                                  </div>
+                                  <div class="form-group input-group">
+                                      <span class="input-group-addon">
+                                          <i class="fa fa-lock"  ></i>
+                                      </span>
+                                      <input type="password" class="form-control"  placeholder="Password" />
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="checkbox-inline">
+                                          <input type="checkbox" /> Recordarme
+                                      </label>
+                                      <span class="pull-right">
+                                          <a href="#" >Olvidaste tu password ? </a> 
+                                      </span>
+                                  </div>
+                                  <a href="#" class="btn btn-primary ">Ingresar</a>
+                                  <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-primary ">
+                                    Twitter
+                                  </a>
+                                  <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary ">
+                                    Facebook
+                                  </a>
+                                  <hr/>
+                                      No estas registrado ? 
+                                      <a href="registeration.html" >click aqui 
+                                  </a> 
+                              </form>
+                          {% else %}    
+                              <h1> Bienvenido {{ user }}</h1>
+                              <meta http-equiv="Refresh" content="1;url=principal">
+                              <a href="/salir/">LogOut</a>
+                          {% endif %}
+                      </div>                             
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+      <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+      <!-- JQUERY SCRIPTS -->
+      <script src="{% static 'assets/js/jquery-1.10.2.js' %}"></script>
+        <!-- BOOTSTRAP SCRIPTS -->
+      <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+      <!-- METISMENU SCRIPTS -->
+      <script src="{% static 'assets/js/jquery.metisMenu.js' %}"></script>
+        <!-- CUSTOM SCRIPTS -->
+      <script src="{% static 'assets/js/custom.js' %}"></script>
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-38955291-1', 'auto');
+        ga('send', 'pageview');
+      </script>
+  </body>
+</html>

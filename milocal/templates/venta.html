@@ -1,0 +1,84 @@
+﻿{% load staticfiles %}
+{% include "cabecera.html" %}
+                            <li>
+                                <a  href="{% url 'milocal.views.main' %}">
+                                    <i class="fa fa-table fa-3x"></i>Listado Productos
+                                </a>
+                            </li>   
+                            <li>
+                                <a href="{% url 'milocal.views.add'%}"><i class="fa fa-edit fa-3x"></i>Adicionar Producto</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'milocal.views.addmarca'%}"><i class="glyphicon glyphicon-check fa-3x"></i>Adicionar Marca</a>
+                            </li> 
+                            <li>
+                                <a class="active-menu" href="#"><i class="glyphicon glyphicon-shopping-cart fa-3x"></i>Realizar Venta</a>
+                            </li> 
+                        </ul>                   
+                    </div>                
+                </nav>  
+                <!-- /. NAV SIDE  -->
+                <div id="page-wrapper" >
+                    <div id="page-inner">                                                            
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Advanced Tables -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Factura de Venta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="table-responsive">              
+                                            Identificacion: {{ formV.idcliente}}
+                                            Nombre Cliente: {{ formV.nombrecliente }}
+                                            <hr />                                       
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>                                           
+                                                        <th>Marca</th> 
+                                                        <th>Referencia</th>  
+                                                        <th>Descripcion</th>
+                                                        <th>Disponible</th>
+                                                        <th>Precio</th>  
+                                                        <th>Descuento</th>   
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                     <tr>                                            
+                                                        <td>
+                                                            {{ marca }}
+                                                        </td> 
+                                                        <td>  
+                                                            {{ producto.referencia }}
+                                                        </td>
+                                                        <td>
+                                                            {{ producto.descripcion }} 
+                                                        </td>
+                                                        <td>
+                                                            {{ producto.disponible }} 
+                                                        </td> 
+                                                        <td>  
+                                                            {{ producto.precio }}
+                                                        </td>     
+                                                        <td>
+                                                            {{ producto.descuento }} 
+                                                        </td> 
+                                                    </tr>                                       
+                                                </tbody>
+                                            </table>
+                                            <hr/>
+                                            Cantidad: {{ formV.cantidad }}
+                                            <hr/>
+                                            <div align="right">
+                                                <a href="{% url 'milocal.views.ejecutarV' producto.pk %}">
+                                                    <button type="button" class="btn btn-success btn-back">
+                                                        <i class="glyphicon glyphicon-shopping-cart fa-2x"></i>
+                                                    </button>
+                                                </a>
+                                            </div>                                
+                                        </div>
+                                    </div>
+                                </div>                   
+                             </div>            
+                        </div>
+{% include "footer.html" %}
