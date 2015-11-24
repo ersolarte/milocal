@@ -101,8 +101,20 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+#STATIC_PATH = os.path.join(BASE_DIR,'static')
 # STATIC_URL = '/static/'
 STATIC_URL = '/static/'
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+#)
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 AUTHENTICATION_BACKENDS=(
         'social.backends.facebook.FacebookAppOAuth2',
@@ -118,7 +130,3 @@ SOCIAL_AUTH_TWITTER_SECRET = 'IC4vFVPHlPSJnazKVP9iOosxn8nTVkmKFYBpQoZThjfkgChdtZ
 
 SOCIAL_AUTH_FACEBOOK_KEY = '995708703785921'
 SOCIAL_AUTH_FACEBOOK_SECRET = '045c123de3b6521be08511c6b775ee23'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)

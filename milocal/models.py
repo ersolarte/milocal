@@ -22,6 +22,7 @@ class Producto(models.Model):
 	disponible  = models.CharField(max_length=2, choices=estado)
 	descripcion = models.TextField()
 	descuento   = models.IntegerField(default=0)
+	imagen 		= models.ImageField(upload_to='photos')
 
 	def __str__(self):
 		return str("( %s ) %s --- VALOR: %0.f" %(self.referencia,self.descripcion[:60],self.precio))

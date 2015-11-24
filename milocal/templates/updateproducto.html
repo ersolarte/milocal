@@ -32,17 +32,26 @@
                                         Modificar Producto
                                     </div>
                                     <div class="panel-body"> 
-                                        <form action="{% url 'milocal.views.modificarproducto' producto.pk  %}" method="POST">
+                                        <form action="{% url 'milocal.views.modificarproducto' producto.pk  %}" method="POST" enctype="multipart/form-data">
                                                 {% csrf_token %}
                                                 <table class="table table-striped">
                                                     {{ form.as_table }} 
-                                                </table>    
-                                                
+                                                    <tr align="Center">
+                                                        <td colspan="2">
+                                                            Imagen Actual
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center" colspan="2">            
+                                                            <img src="/media/{{ producto.imagen }}" width="320" height="250">
+                                                        </td>
+                                                    </tr>
+                                                </table>                                                    
                                                 <hr/>
                                                 <div align="right">
                                                     <input class="btn btn-primary" type="submit" value="Actualizar Datos"> 
                                                 </div>
-                                        </form>modificarproducto
+                                        </form>
                                     </div>                   
                                 </div>
                             </div>

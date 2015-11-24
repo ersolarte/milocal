@@ -1,0 +1,75 @@
+﻿{% load staticfiles %}
+{% include "cabecera.html" %}                            
+                            <li>
+                                <a href="{% url 'milocal.views.main' %}">
+                                    <i class="fa fa-table fa-3x"></i>Listado Productos</a>
+                            </li>   
+                            <li>
+                                <a href="{% url 'milocal.views.add'%}"><i class="fa fa-edit fa-3x"></i>Adicionar Producto</a>
+                            </li> 
+                            <li>
+                                <a href="{% url 'milocal.views.addmarca'%}"><i class="glyphicon glyphicon-check fa-3x"></i>Adicionar Marca</a>
+                            </li>
+                             <li>
+                                <a class="active-menu" href="#"><i class="glyphicon glyphicon-shopping-cart fa-3x"></i>Ventas</a>
+                            </li>  
+                        </ul>                   
+                    </div>                
+                </nav>  
+                <!-- /. NAV SIDE  -->
+                <div id="page-wrapper" >
+                    <div id="page-inner">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Form Elements -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Listado de Ventas
+                                    </div>
+                                   <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                                <thead>
+                                                    <tr>                       
+                                                        <th>Identificacion</th>
+                                                        <th>Nombre del cliente</th>   
+                                                        <th>Cantidad</th>
+                                                        <th>Valor Cancelado</th>
+                                                        <th>Producto</th>                                       
+                                                    </tr>
+                                                </thead>
+                                                <tbody>                                            
+                                                    <tr>                                           
+                                                    {%for allventa in venta %} 
+                                                        <td>
+                                                            {{ allventa.idcliente }}
+                                                        </td>
+                                                        <td>
+                                                            {{ allventa.nombrecliente }}
+                                                        </td>  
+                                                        <td align="center">
+                                                            {{ allventa.cantidad }}
+                                                        </td>      
+                                                        <td align="center">
+                                                            {{ allventa.valor_a_pagar }}
+                                                        </td>    
+                                                        <td align="center"> 
+
+                                                            {{ allventa.idproducto }}
+                                                        </td>
+                                                    </tr>  
+                                                    {%endfor %}                                            
+                                                      
+                                                </tbody>
+                                            </table>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <!--End Advanced Tables -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+{% include "footer.html" %}

@@ -16,7 +16,7 @@
                                 </a>
                             </li>
                              <li>
-                                <a href="#"><i class="glyphicon glyphicon-shopping-cart fa-3x"></i>Realizar Venta</a>
+                                <a href="{% url 'milocal.views.listventas'%}"><i class="glyphicon glyphicon-shopping-cart fa-3x"></i>Ventas</a>
                             </li>  
                         </ul>                   
                     </div>                
@@ -83,21 +83,24 @@
                                                                 </button>
                                                             </a>
                                                         </td>      
-                                                        <td align="center">                                         
-                                                            <button class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal">
-                                                                 <i class="glyphicon glyphicon-trash"></i>
+                                                        <td align="center" class="delmarca"> 
+                                                            <button data-whatever="{{allmarcas.pk}}" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal">
+                                                                <i class="glyphicon glyphicon-trash"></i>
                                                             </button>
-                                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
-                                                                    <div class="modal-content">           
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                            <h4 class="modal-title" id="myModalLabel">Eliminar Marca</h4>
+                                                                        </div>
                                                                         <div class="modal-body">
-                                                                            ¿Deseas eliminar?
+                                                                            ¿Deseas realmente eliminar este marca?
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No
-                                                                            </button>
-                                                                            <a href="{% url 'milocal.views.eliminarmarca' allmarcas.pk %}">
-                                                                                <button type="button" class="btn btn-primary">SI
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+                                                                            <a href="">
+                                                                                <button  type="button" class="btn btn-primary">SI
                                                                                 </button>
                                                                             </a>
                                                                         </div>
@@ -112,10 +115,9 @@
                                         </div>                                        
                                     </div>
                                 </div>
-                                <!--End Advanced Tables -->
                             </div>
                         </div>
                     </div>
                 </div>            
-            </div>
+            </div>  
 {% include "footer.html" %}

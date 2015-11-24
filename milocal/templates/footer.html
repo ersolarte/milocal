@@ -1,20 +1,24 @@
 {% load staticfiles %}
-             <!-- JQUERY SCRIPTS -->
-            <script src="{% static 'assets/js/jquery-1.10.2.js' %}"></script>
-              <!-- BOOTSTRAP SCRIPTS -->
-            <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-            <!-- METISMENU SCRIPTS -->
-            <script src="{% static 'assets/js/jquery.metisMenu.js' %}"></script>
-             <!-- DATA TABLE SCRIPTS -->
-            <script src="{% static 'assets/js/dataTables/jquery.dataTables.js' %}"></script>
-            <script src="{% static 'assets/js/dataTables/dataTables.bootstrap.js' %}"></script>
-                <script>
-                    $(document).ready(function () {
-                        $('#dataTables-example').dataTable();
-                    });
-            </script>
-            <!-- CUSTOM SCRIPTS -->
-            <script src="{% static 'assets/js/custom.js' %}"></script>
+		<script>
+        $('#myModal').on('show.bs.modal', function (event) {
+            var button    = $(event.relatedTarget) // Button that triggered the modal
+        	var id = button.data('whatever') // Extract info from data-* attributes
+            var modal     = $(this)             
+            var url = /eliminarmarca/+id;
+
+            modal.find('.modal-footer a').attr({'href': url})   
+            })
+         $('#myModal2').on('show.bs.modal', function (event) {
+            var button    = $(event.relatedTarget) // Button that triggered the modal
+            var id = button.data('whatever') // Extract info from data-* attributes
             
+
+            var modal     = $(this)             
+            var url = /eliminar/+id;
+
+            modal.find('.modal-footer a').attr({'href': url})   
+            })
+        </script>        
+          
     </body>
 </html>

@@ -27,58 +27,75 @@
                                     <div class="panel-heading">
                                         Factura de Venta
                                     </div>
-                                    <div class="panel-body">
-                                        <div class="table-responsive">              
-                                            Identificacion: {{ formV.idcliente}}
-                                            Nombre Cliente: {{ formV.nombrecliente }}
-                                            <hr />                                       
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>                                           
-                                                        <th>Marca</th> 
-                                                        <th>Referencia</th>  
-                                                        <th>Descripcion</th>
-                                                        <th>Disponible</th>
-                                                        <th>Precio</th>  
-                                                        <th>Descuento</th>   
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                     <tr>                                            
-                                                        <td>
-                                                            {{ marca }}
-                                                        </td> 
-                                                        <td>  
-                                                            {{ producto.referencia }}
-                                                        </td>
-                                                        <td>
-                                                            {{ producto.descripcion }} 
-                                                        </td>
-                                                        <td>
-                                                            {{ producto.disponible }} 
-                                                        </td> 
-                                                        <td>  
-                                                            {{ producto.precio }}
-                                                        </td>     
-                                                        <td>
-                                                            {{ producto.descuento }} 
-                                                        </td> 
-                                                    </tr>                                       
-                                                </tbody>
-                                            </table>
-                                            <hr/>
-                                            Cantidad: {{ formV.cantidad }}
-                                            <hr/>
-                                            <div align="right">
-                                                <a href="{% url 'milocal.views.ejecutarV' producto.pk %}">
-                                                    <button type="button" class="btn btn-success btn-back">
-                                                        <i class="glyphicon glyphicon-shopping-cart fa-2x"></i>
-                                                    </button>
-                                                </a>
-                                            </div>                                
-                                        </div>
+                                    <div align="left"> 
+                                        <br>
+                                        <form id="frmventa" action="{% url 'milocal.views.ejecutarV' producto.pk %}" method="POST">
+                                        {% csrf_token %}
+                                         || Identificacion: <input type="number" min="1" name="idcliente" autocomplete="off" required>
+                                         || Nombre cliente: <input type="text" name="nombrecliente" required> ||
+                                         <hr/>
                                     </div>
-                                </div>                   
-                             </div>            
-                        </div>
+                                    <br>
+                                    <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th># ID</th>
+                                            <th>Referencia</th>  
+                                            <th>Precio</th>                                              
+                                            <th>Cantidad</th>                                                
+                                            <th>Descripcion</th>
+                                            <th>Descuento</th>
+                                            <th>Marca</th>                                                
+                                            <th>Disponible</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                         <tr>
+                                            <td>                                                   
+                                                {{ producto.id }}
+                                            </td>
+                                            <td>  
+                                                {{ producto.referencia }}
+                                            </td>
+                                            <td>  
+                                                {{ producto.precio }}
+                                            </td>
+                                            <td>
+                                                {{ producto.cantidad }} 
+                                            </td> 
+                                            <td>
+                                                {{ producto.descripcion }} 
+                                            </td>       
+                                            <td>
+                                                {{ producto.descuento }} 
+                                            </td>                            
+                                            <td>
+                                                {{ marca }}
+                                            </td> 
+                                            <td>
+                                                {{ producto.disponible }} 
+                                            </td> 
+                                        </tr>                                                                                                           
+                                    </tbody>
+                                </table>
+
+                                <div class="panel-body">
+                                    <div class="table-responsive"> 
+                                        <div align="right">
+                                        <hr/>                          
+                                            Cantidad: <input type="number" id="cantidad"  min="0" name="cantidad" required onChange="calculo(this.value,precio.value,total);" autocomplete="off">
+                                            <input type="hidden" id="precio"  name="precio" value="{{ producto.precio }}">
+                                            Total a pagar: <input type="text" id="total" name="total" readonly>
+                                        </form>
+                                        <hr/> 
+                                       
+                                            <button type="submit" class="btn btn-success btn-back" form="frmventa">
+                                                <i class="glyphicon glyphicon-shopping-cart fa-2x"></i>
+                                            </button>
+                                        </div>      
+                                    </div>
+                                </div>
+                            </div>                   
+                         </div>            
+                    </div>
 {% include "footer.html" %}

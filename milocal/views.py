@@ -35,8 +35,9 @@ class FormularioVenta(ModelForm):
 		exclude = ["id"]	
 
 def main(request):
-	producto = Producto.objects.all().order_by("-cantidad")#rescata todos los datos de la tablas y ordena por fecha
-	return render_to_response("principal.html",dict(producto=producto,user=request.user))
+	producto = Producto.objects.all().order_by("-id")#rescata todos los datos de la tablas y ordena por fecha
+	marca = Marca.objects.all()
+	return render_to_response("principal.html",dict(marca=marca,producto=producto,user=request.user))
 
 ## ----------------- PRODUCTOS -----------------------------
 def add(request):
@@ -46,7 +47,7 @@ def add(request):
 
 def adicionarproducto(request):		
 	if request.method == 'POST':
-		form= FormularioProducto(request.POST)
+		form= FormularioProducto(request.POST,request.FILES)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect(reverse("milocal.views.main"))	
@@ -63,7 +64,7 @@ def update(request,pk):
 def modificarproducto(request,pk):		
 	if request.method == 'POST':
 		prodmodificado = Producto.objects.get(pk=int(pk))	
-		producto= FormularioProducto(request.POST,instance=prodmodificado)
+		producto= FormularioProducto(request.POST, request.FILES,instance=prodmodificado)
 		
 		if producto.is_valid():
 			producto.save()
@@ -75,8 +76,15 @@ def modificarproducto(request,pk):
 
 def eliminar(request,pk):	
 	producto= Producto.objects.get(pk=int(pk))	
-	producto.delete()	
+	
+	#bandera= Venta.objects.filter(idproducto=producto)
+
+	#if bandera:
+	#	return HttpResponseRedirect(reverse("milocal.views.main"))
+	#else:	
+	producto.delete()
 	return HttpResponseRedirect(reverse("milocal.views.main"))
+
 
 def detalle(request,pk):	
 	idproducto= Producto.objects.get(pk=int(pk))
@@ -122,23 +130,53 @@ def modificarmarca(request,pk):
 			return render_to_response("updatemarca.html",p)
 
 def eliminarmarca(request,pk):
-	marca= Marca.objects.get(pk=int(pk))	
-	marca.delete()	
-	return HttpResponseRedirect(reverse("milocal.views.addmarca"))
+	marca= Marca.objects.get(pk=int(pk))
+	
+	bandera= Producto.objects.filter(idmarca=pk)
+
+	if bandera:
+		return HttpResponseRedirect(reverse("milocal.views.addmarca"))
+	else:	
+		marca.delete()	
+		return HttpResponseRedirect(reverse("milocal.views.addmarca"))
 ## ----------------- VENTA ------------------------------
 
 def venta(request, pk):	
 	producto = Producto.objects.get(pk=int(pk))	
 	pk_marca=producto.idmarca_id
 	marca= Marca.objects.get(pk=int(pk_marca))	
-	p= dict(producto= producto, marca=marca, formP=FormularioProducto(), formV=FormularioVenta(), user=request.user)
+	p= dict(producto= producto, marca=marca, form=FormularioVenta(), user=request.user)
 	p.update(csrf(request))
 	return render_to_response("venta.html",p)
 
 def ejecutarV(request, pk):	
-		
 	
+	p=request.POST	
+	producto = Producto.objects.get(pk=int(pk))		
+	
+	miventa = Venta()
+	fv=FormularioVenta(instance=miventa)
+
+	fv.fields['idcliente'].required= False
+	fv.fields['nombrecliente'].required= False
+	fv.fields['cantidad'].required= False
+	fv.fields['valor_a_pagar'].required= False	
+
+	miventa= fv.save(commit= False)
+	
+	miventa.idcliente=p["idcliente"]
+	miventa.nombrecliente=p["nombrecliente"]
+	miventa.cantidad=p["cantidad"]
+	miventa.valor_a_pagar=p["total"]
+	miventa.idproducto= producto
+
+	miventa.save()
 	return HttpResponseRedirect(reverse("milocal.views.main"))
+
+def listventas(request):
+	venta = Venta.objects.all()
+	producto = Producto.objects.all()
+	return render_to_response("listventas.html",dict(venta=venta,producto=producto,user=request.user))
 		
 ## ----------------- SALIR ------------------------------
 def salir(request):

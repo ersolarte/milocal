@@ -12,7 +12,7 @@
                                 <a href="{% url 'milocal.views.addmarca'%}"><i class="glyphicon glyphicon-check fa-3x"></i>Adicionar Marca</a>
                             </li> 
                             <li>
-                                <a href="#"><i class="glyphicon glyphicon-shopping-cart fa-3x"></i>Realizar Venta</a>
+                                <a href="{% url 'milocal.views.listventas'%}"><i class="glyphicon glyphicon-shopping-cart fa-3x"></i>Ventas</a>
                             </li> 
                         </ul>                   
                     </div>                
@@ -48,6 +48,7 @@
                                                             </a>
                                                         </td>
                                                         <td>
+                                                           
                                                             {{ allproducto.descripcion }} --- VALOR: {{ allproducto.precio }}
                                                         </td>  
                                                         <td align="center">
@@ -57,27 +58,30 @@
                                                             </a>
                                                         </td>      
                                                         <td align="center">
-                                                            <button class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal">
+                                                            <button data-whatever="{{allproducto.pk}}" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal2">
                                                                  <i class="glyphicon glyphicon-trash"></i>
                                                             </button>
-                                                            <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">           
-                                                                        <div class="modal-body">
-                                                                            ¿Deseas eliminar?
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">No
-                                                                            </button>
-                                                                            <a href="{% url 'milocal.views.eliminar' allproducto.pk %}">
-                                                                                <button type="button" class="btn btn-primary">SI
-                                                                                </button>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>    
+
+                                                            <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                              <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                  <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title">Eliminar Producto</h4>
+                                                                  </div>
+                                                                  <div class="modal-body">
+                                                                    <p>¿Deseas realmente eliminar este producto?</p>
+                                                                  </div>
+                                                                  <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+                                                                    <a href="">
+                                                                        <button type="button" class="btn btn-primary">SI</button>
+                                                                    </a>
+                                                                  </div>
+                                                                </div><!-- /.modal-content -->
+                                                              </div><!-- /.modal-dialog -->
+                                                            </div><!-- /.modal -->
+                                                        </td>
                                                         <td align="center">                                             
                                                             <a href="{% url 'milocal.views.venta' allproducto.pk %}">
                                                                <button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-shopping-cart"></i>
